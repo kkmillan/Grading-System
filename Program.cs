@@ -109,26 +109,6 @@ namespace Grading_System
                 }
             } while (action != "5");
 
-            /*
-            // Create a Dictionary to store pairs of strings and integers
-            Dictionary<string, double> pairs = new Dictionary<string, double>();
-
-            // Add pairs to the dictionary
-            pairs["kath"] = 2;
-            pairs["dog"] = 45;
-            pairs["John Cena"] = 10;
-
-
-            // Print pairs in the dictionary
-            Console.WriteLine("Pairs:");
-            foreach (var pair in pairs)
-            {
-                Console.WriteLine("{" + pair.Key + ", " + pair.Value + "}");
-            }
-
-            pairs["kath"] = 98; // Update the value of the key "kath"
-            Console.WriteLine($"\nkath : {pairs["kath"]}");
-            */
         }
 
 
@@ -169,11 +149,12 @@ namespace Grading_System
                 int slots = numberOfStudents - i - 1;
                 Console.Write($"There are {slots} slots left. Continue?(y/n) ");
                 string response = Console.ReadLine();
-                if (response.ToLower() == "n")
+                
+                if (response.ToLower() == "n") // If the user enters "n", break the loop
                 {
                     break;
                 }
-                else if (slots <= 0 && response.ToLower() == "y")
+                else if (slots <= 0 && response.ToLower() == "y") // If there are no more slots available and the user enters "y", display a message and break the loop
                 {
                     Console.WriteLine("No more slots available. Press any key to continue...");
                     Console.ReadLine();
@@ -245,7 +226,7 @@ namespace Grading_System
                         double rawAverage = (science + math + english) / 3;
                         double average = Math.Round(rawAverage, 2);
 
-
+                        // If the student name is null, break the loop to save space in formatting
                         if (studentLists[index] == null) 
                         {                         
                             break;
@@ -258,6 +239,7 @@ namespace Grading_System
                     Console.Write($"\nSelect Student to Enter Grades (1-{currentStudents}): ");
                     int studentIndex;
 
+                    //
                     while (true)
                     {
                         while (!int.TryParse(Console.ReadLine(), out studentIndex)) // Validate integer input
@@ -318,19 +300,20 @@ namespace Grading_System
                                 break;
                         }
 
+                        // Calculate the average grade
                         double rawAverage = ( scienceGrade[actualIndex] + mathGrade[actualIndex] + englishGrade[actualIndex] ) / 3;
                         double average = Math.Round(rawAverage, 2);
-
+                        // Display the student's name and their grades
                         Console.WriteLine($"\n{header}");
                         Console.WriteLine($"{" ",-5} {studentLists[actualIndex],-25} {scienceGrade[actualIndex],-10} {mathGrade[actualIndex],-10} {englishGrade[actualIndex],-10} {average + "%",-10}\n");
                     
-                    
+                        // Ask the user if they want to continue entering grades for the same student
                         Console.Write($"Do you want to continue inputting {studentLists[actualIndex]}'s grade(y/n): ");
                         answer = Console.ReadLine();
 
                     } while (answer.ToLower() == "y");
 
-
+                    // Ask the user if they want to continue entering grades for other students
                     Console.Write("Do you want to continue entering grades for other students(y/n): ");
                     input = Console.ReadLine();
 
@@ -362,6 +345,8 @@ namespace Grading_System
 
 
             }
+
+            // If there are no students enrolled, display a message and return to the main menu
             else 
             {                 
                 Console.WriteLine("No students have been enrolled yet. Press any key to return to main menu");
@@ -419,8 +404,8 @@ namespace Grading_System
                 Console.WriteLine("--------------------------");
                 string header = string.Format("{0,-5} {1,-25} {2,-10} {3,-10} {4,-10} {5,-10}", " ", "Name", "Science", "Math", "English", "Average Grade");
                 Console.WriteLine(header);
-                // Print the list of students and their grades
-                for (int index = 0; index < studentLists.Length; index++)
+                
+                for (int index = 0; index < studentLists.Length; index++) // Print the list of students and their grades
                 {
                     double science = (scienceGrade[index] != null) ? scienceGrade[index] : 0;
                     double math = (mathGrade[index] != null) ? mathGrade[index] : 0;
@@ -433,16 +418,19 @@ namespace Grading_System
                         break;
                     }
 
+                    // Display the list of students and their grades
                     int dispIndex = index + 1;
                     Console.WriteLine($"{"[" + dispIndex + "]",-5} {studentLists[index],-25} {science,-10} {math,-10} {english,-10} {average + "%",-10}");
                 }
-
+                
+                // Return to the main menu
                 Console.WriteLine("\nPress any key to return to main menu");
                 Console.ReadLine();
             }
 
             else
             {
+                // If there are no students enrolled, display a message and return to the main menu
                 Console.WriteLine("No students have been enrolled yet. Press any key to return to main menu");
                 Console.ReadLine();
             }
@@ -535,7 +523,6 @@ namespace Grading_System
                     if (pair.Value[0] == keyValuePairs.First().Value[0])
                     {
                         Console.WriteLine($"{" ",-5} {pair.Key,-25} {pair.Value[1],-10} {pair.Value[2],-10} {pair.Value[3],-10} {pair.Value[0] + "%",-10}");
-                        //Console.WriteLine($"Congratulations {pair.Key}!");
                     }
                 }
 
@@ -545,6 +532,7 @@ namespace Grading_System
             }
                else
             {   
+                // If there are no students enrolled, display a message and return to the main menu
                 Console.WriteLine("No students have been enrolled yet. Press any key to return to main menu");
                 Console.ReadLine();
             }
